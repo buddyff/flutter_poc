@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'views/returning_user.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,12 +30,13 @@ class MyApp extends StatelessWidget {
         ),
         home: MyHomePage(title: 'Flutter Demo Home Page'),
         routes: <String, WidgetBuilder>{
-          '/screen1': (BuildContext context) => MyHomePage(title: 'Screen 1')
+          '/returning-user': (BuildContext context) =>
+              ReturningUser(title: 'Screen 1')
         });
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -49,57 +51,77 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  void _navigateToScreen1() {
-    Navigator.of(context).pushNamed('/screen1');
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: null,
+      body: _getScreen(context),
+    );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FlatButton(
-              child: Text('Go To Screen 1'),
-              onPressed: _navigateToScreen1,
-              color: Colors.blue,
-              textColor: Colors.white,
-            )
-          ],
-        ),
-      ),
-    );
+  _getScreen(BuildContext context) {
+    return Column(children: <Widget>[_topView(), _bottomView(context)]);
+  }
+
+  _topView() {
+    return Expanded(
+        flex: 7,
+        child: Container(
+            color: Color.fromRGBO(91, 95, 180, 1),
+            width: double.infinity,
+            child: FractionallySizedBox(
+              heightFactor: 0.9,
+              widthFactor: 0.9,
+              child: Container(
+                child: Padding(
+                    padding: EdgeInsets.all(50),
+                    child: Image(image: AssetImage("lib/assets/logo.png"))),
+                alignment: Alignment.center,
+                decoration: new BoxDecoration(
+                    color: Colors.white, shape: BoxShape.circle),
+              ),
+            )));
+  }
+
+  _bottomView(BuildContext context) {
+    return Expanded(
+        flex: 3,
+        child: Container(
+            color: Colors.white,
+            margin: EdgeInsets.all(8),
+            child: Column(
+              children: [
+                Row(children: [
+                  Expanded(
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/returning-user');
+                      },
+                      child: Text("I'm a new user"),
+                      color: Color.fromRGBO(91, 95, 180, 1),
+                      textColor: Colors.white,
+                      height: 40,
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0)),
+                    ),
+                  )
+                ]),
+                SizedBox(height: 10),
+                Row(children: [
+                  Expanded(
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/returning-user');
+                      },
+                      child: Text("I'm a returning user"),
+                      color: Color.fromRGBO(91, 95, 180, 0.4),
+                      height: 40,
+                      textColor: Color.fromRGBO(91, 95, 180, 1),
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0)),
+                    ),
+                  )
+                ])
+              ],
+            )));
   }
 }
