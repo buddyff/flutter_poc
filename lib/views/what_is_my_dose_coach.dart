@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class WhatIsMyDoseCoach extends StatefulWidget {
   @override
@@ -26,8 +25,6 @@ class WhatIsMyDoseCoachState extends State<WhatIsMyDoseCoach> {
   }
 
   _scrollListener() {
-    print(_controller.offset);
-    print(_controller.position.userScrollDirection);
     if (_controller.offset >= 90) {
       setState(() {
         showDescription = false;
@@ -68,25 +65,6 @@ class WhatIsMyDoseCoachState extends State<WhatIsMyDoseCoach> {
                 SliverChildBuilderDelegate((BuildContext context, int index) {
           return _bottomView();
         }, childCount: 1)),
-
-        /*SliverGrid(
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200.0,
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 10.0,
-            childAspectRatio: 4.0,
-          ),
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return Container(
-                alignment: Alignment.center,
-                color: Colors.teal[100 * (index % 9)],
-                child: Text('Grid Item $index'),
-              );
-            },
-            childCount: 20,
-          ),
-        )*/
       ],
     );
   }
@@ -141,7 +119,7 @@ class WhatIsMyDoseCoachState extends State<WhatIsMyDoseCoach> {
             Expanded(
               child: FlatButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/returning-user');
+                  Navigator.of(context).pushNamed('/select-your-smart-pens');
                 },
                 child: Text("I have a smart pen"),
                 color: Color.fromRGBO(91, 95, 180, 0.2),

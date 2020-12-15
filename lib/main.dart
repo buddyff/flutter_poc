@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_poc/views/select_your_smart_pens.dart';
 import 'package:flutter_poc/views/what_is_my_dose_coach.dart';
 import 'views/country_selection.dart';
 
@@ -34,7 +35,9 @@ class MyApp extends StatelessWidget {
           '/returning-user': (BuildContext context) =>
               CountryScreen(title: 'Screen 1'),
           '/what-is-my-dose-coach': (BuildContext context) =>
-              WhatIsMyDoseCoach()
+              WhatIsMyDoseCoach(),
+          '/select-your-smart-pens': (BuildContext context) =>
+              SelectYourSmartPens(),
         });
   }
 }
