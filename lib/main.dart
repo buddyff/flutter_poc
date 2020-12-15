@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_poc/views/what_is_my_dose_coach.dart';
 import 'views/country_selection.dart';
 
 void main() {
@@ -31,7 +32,9 @@ class MyApp extends StatelessWidget {
         home: MyHomePage(title: 'Flutter Demo Home Page'),
         routes: <String, WidgetBuilder>{
           '/returning-user': (BuildContext context) =>
-              CountryScreen(title: 'Screen 1')
+              CountryScreen(title: 'Screen 1'),
+          '/what-is-my-dose-coach': (BuildContext context) =>
+              WhatIsMyDoseCoach()
         });
   }
 }
@@ -113,7 +116,7 @@ class MyHomePage extends StatelessWidget {
                         Navigator.of(context).pushNamed('/returning-user');
                       },
                       child: Text("I'm a returning user"),
-                      color: Color.fromRGBO(91, 95, 180, 0.4),
+                      color: Color.fromRGBO(91, 95, 180, 0.2),
                       height: 40,
                       textColor: Color.fromRGBO(91, 95, 180, 1),
                       shape: new RoundedRectangleBorder(

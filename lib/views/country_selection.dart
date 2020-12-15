@@ -23,7 +23,8 @@ class _CountryScreenState extends State<CountryScreen> {
   }
 
   _getScreen(BuildContext context) {
-    return Column(children: <Widget>[_topView(), _midView(), _bottomView()]);
+    return Column(
+        children: <Widget>[_topView(), _midView(), _bottomView(context)]);
   }
 
   _topView() {
@@ -63,7 +64,7 @@ class _CountryScreenState extends State<CountryScreen> {
             )));
   }
 
-  _bottomView() {
+  _bottomView(BuildContext context) {
     return Container(
       color: Colors.white,
       child: Container(
@@ -81,7 +82,7 @@ class _CountryScreenState extends State<CountryScreen> {
               Expanded(
                 child: FlatButton(
                   onPressed: () {
-                    //Navigator.of(context).pushNamed('/returning-user');
+                    Navigator.of(context).pushNamed('/what-is-my-dose-coach');
                   },
                   child: Text("Next"),
                   color: Color.fromRGBO(91, 95, 180, 1),
