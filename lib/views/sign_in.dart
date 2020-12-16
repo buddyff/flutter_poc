@@ -58,7 +58,9 @@ class SignIn extends StatelessWidget {
               children: [
                 Expanded(
                   child: FlatButton(
-                    onPressed: _goToNextStep,
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/sign-in-form');
+                    },
                     child: Text('Sign in'),
                     color: Color.fromRGBO(91, 95, 180, 1),
                     textColor: Colors.white,
@@ -74,6 +76,4 @@ class SignIn extends StatelessWidget {
       ),
     );
   }
-
-  _goToNextStep() {}
 }

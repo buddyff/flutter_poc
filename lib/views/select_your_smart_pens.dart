@@ -9,7 +9,6 @@ class SelectYourSmartPensState extends State<SelectYourSmartPens> {
   bool showDescription = true;
   int selectedBox = 0;
   int numberOfDevices = 0;
-  ScrollController _controller;
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +18,7 @@ class SelectYourSmartPensState extends State<SelectYourSmartPens> {
   }
 
   _getScreen(BuildContext context) {
-    return CustomScrollView(controller: _controller, slivers: <Widget>[
+    return CustomScrollView(slivers: <Widget>[
       SliverAppBar(
         pinned: true,
         backgroundColor: Color.fromRGBO(91, 95, 180, 1),

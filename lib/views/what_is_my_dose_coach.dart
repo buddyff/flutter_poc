@@ -7,7 +7,6 @@ class WhatIsMyDoseCoach extends StatefulWidget {
 
 class WhatIsMyDoseCoachState extends State<WhatIsMyDoseCoach> {
   bool showDescription = true;
-  double opacity = 1.0;
   ScrollController _controller;
 
   Widget build(BuildContext context) {
