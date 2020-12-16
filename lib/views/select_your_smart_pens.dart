@@ -7,8 +7,8 @@ class SelectYourSmartPens extends StatefulWidget {
 
 class SelectYourSmartPensState extends State<SelectYourSmartPens> {
   bool showDescription = true;
-  double opacity = 1.0;
   int selectedBox = 0;
+  int numberOfDevices = 0;
   ScrollController _controller;
 
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class SelectYourSmartPensState extends State<SelectYourSmartPens> {
                       child: FlatButton(
                     onPressed: selectedBox != 0
                         ? () {
-                            _goToNextStep(context);
+                            _showModal(context);
                           }
                         : null,
                     child: Text("Next"),
@@ -180,9 +180,152 @@ class SelectYourSmartPensState extends State<SelectYourSmartPens> {
         ));
   }
 
-  void _goToNextStep(BuildContext context) {
-    print(":)");
+  void _showModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) => BottomSheet(),
+    );
   }
 }
 
 enum BoxType { AllStar, Embody, Qr }
+
+class BottomSheet extends StatefulWidget {
+  @override
+  BottomSheetState createState() => BottomSheetState();
+}
+
+class BottomSheetState extends State<BottomSheet> {
+  int numberOfDevices = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 335,
+      margin: EdgeInsets.only(top: 24, left: 16, right: 16, bottom: 16),
+      child: Column(
+        children: [
+          Text(
+            'How many AllStar Connect insuling pens do you have?',
+            style: TextStyle(fontSize: 24),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 30),
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      numberOfDevices = 1;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: (numberOfDevices == 1)
+                          ? Color.fromRGBO(91, 95, 180, 0.2)
+                          : Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          '1 pen',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Image(
+                          image: AssetImage('lib/assets/oneAllStar.png'),
+                          height: 100,
+                          fit: BoxFit.fitWidth,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      numberOfDevices = 2;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: (numberOfDevices == 2)
+                          ? Color.fromRGBO(91, 95, 180, 0.2)
+                          : Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          '2 pens',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Image(
+                          image: AssetImage('lib/assets/twoAllstars.png'),
+                          height: 100,
+                          fit: BoxFit.fitWidth,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            children: [
+              Expanded(
+                child: FlatButton(
+                  onPressed: numberOfDevices == 0
+                      ? null
+                      : () {
+                          _goToNextStep();
+                        },
+                  child: Text('Next'),
+                  disabledColor: Color.fromRGBO(91, 95, 180, 0.2),
+                  color: Color.fromRGBO(91, 95, 180, 1),
+                  textColor: Colors.white,
+                  disabledTextColor: Color.fromRGBO(91, 95, 180, 0.5),
+                  shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0),
+                  ),
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: FlatButton(
+                  onPressed: () => {
+                    Navigator.of(context).pop(),
+                    setState(() {
+                      numberOfDevices = 0;
+                    })
+                  },
+                  child: Text('Back'),
+                  color: Color.fromRGBO(91, 95, 180, 1),
+                  textColor: Colors.white,
+                  shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0),
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  _goToNextStep() {}
+}
