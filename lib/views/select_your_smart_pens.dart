@@ -327,5 +327,7 @@ class BottomSheetState extends State<BottomSheet> {
     );
   }
 
-  _goToNextStep() {}
+  _goToNextStep() {
+    Navigator.of(context).pushNamed('/sign-in');
+  }
 }

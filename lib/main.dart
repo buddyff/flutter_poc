@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_poc/views/select_your_smart_pens.dart';
+import 'package:flutter_poc/views/sign_in.dart';
 import 'package:flutter_poc/views/what_is_my_dose_coach.dart';
 import 'views/country_selection.dart';
 
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
               WhatIsMyDoseCoach(),
           '/select-your-smart-pens': (BuildContext context) =>
               SelectYourSmartPens(),
+          '/sign-in': (BuildContext context) => SignIn(),
         });
   }
 }
