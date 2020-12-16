@@ -36,9 +36,10 @@ class SignInFormState extends State<SignInForm> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: null,
-        body: _getScreen(context),
-        backgroundColor: Color.fromRGBO(91, 95, 180, 1));
+      appBar: null,
+      body: _getScreen(context),
+      backgroundColor: Color.fromRGBO(91, 95, 180, 1),
+    );
   }
 
   _getScreen(BuildContext context) {
@@ -251,7 +252,12 @@ class SignInFormState extends State<SignInForm> {
               children: [
                 Expanded(
                   child: FlatButton(
-                    onPressed: _isValidForm() ? _checkForm : null,
+                    onPressed: _isValidForm()
+                        ? () {
+                            Navigator.of(context)
+                                .pushNamed('/license-agreement');
+                          }
+                        : null,
                     child: Text('Next'),
                     color: Color.fromRGBO(91, 95, 180, 1),
                     disabledColor: Color.fromRGBO(91, 95, 180, 0.2),
@@ -267,8 +273,6 @@ class SignInFormState extends State<SignInForm> {
           ],
         ));
   }
-
-  _checkForm() {}
 
   _isValidForm() {
     return _nameController.text != "" &&
