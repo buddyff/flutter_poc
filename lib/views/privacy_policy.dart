@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class LicenseAgreement extends StatefulWidget {
+class PrivacyPolicy extends StatefulWidget {
   @override
-  createState() => LicenseAgreementState();
+  createState() => PrivacyPolicyState();
 }
 
-class LicenseAgreementState extends State<LicenseAgreement> {
+class PrivacyPolicyState extends State<PrivacyPolicy> {
   ScrollController _controller;
   bool showDescription = true;
 
@@ -52,7 +52,7 @@ class LicenseAgreementState extends State<LicenseAgreement> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    'End user license agreement',
+                    'Privacy policy',
                     textAlign: TextAlign.left,
                   ),
                   Visibility(
@@ -79,7 +79,7 @@ class LicenseAgreementState extends State<LicenseAgreement> {
         child: Column(
           children: [
             Text(
-              'My Dose Coach End User License Agreement',
+              'My Dose Coach global App Privacy Policy',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 24),
@@ -96,7 +96,7 @@ class LicenseAgreementState extends State<LicenseAgreement> {
                   color: Color.fromRGBO(91, 95, 180, 1),
                   textColor: Colors.white,
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/privacy-policy');
+                    Navigator.of(context).pushNamed("");
                   },
                   shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(30.0),

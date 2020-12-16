@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_poc/views/license_agreement.dart';
+import 'package:flutter_poc/views/privacy_policy.dart';
 import 'package:flutter_poc/views/select_your_smart_pens.dart';
 import 'package:flutter_poc/views/sign_in.dart';
 import 'package:flutter_poc/views/sign_in_form.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
           '/sign-in': (BuildContext context) => SignIn(),
           '/sign-in-form': (BuildContext context) => SignInForm(),
           '/license-agreement': (BuildContext context) => LicenseAgreement(),
+          '/privacy-policy': (BuildContext context) => PrivacyPolicy(),
         });
   }
 }
