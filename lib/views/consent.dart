@@ -91,7 +91,7 @@ class ConsentState extends State<Consent> {
                     disabledTextColor: Color.fromRGBO(91, 95, 180, 0.4),
                     onPressed: _allChecked()
                         ? () {
-                            Navigator.of(context).pushNamed("");
+                            Navigator.of(context).pushNamed("/your-medication");
                           }
                         : null,
                     shape: new RoundedRectangleBorder(

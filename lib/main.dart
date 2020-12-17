@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_poc/views/consent.dart';
 import 'package:flutter_poc/views/license_agreement.dart';
+import 'package:flutter_poc/views/medication_list.dart';
 import 'package:flutter_poc/views/privacy_policy.dart';
 import 'package:flutter_poc/views/select_your_smart_pens.dart';
 import 'package:flutter_poc/views/sign_in.dart';
 import 'package:flutter_poc/views/sign_in_form.dart';
 import 'package:flutter_poc/views/what_is_my_dose_coach.dart';
+import 'package:flutter_poc/views/your_medication.dart';
 import 'views/country_selection.dart';
 
 void main() {
@@ -48,6 +50,8 @@ class MyApp extends StatelessWidget {
           '/license-agreement': (BuildContext context) => LicenseAgreement(),
           '/privacy-policy': (BuildContext context) => PrivacyPolicy(),
           '/consent': (BuildContext context) => Consent(),
+          '/your-medication': (BuildContext context) => YourMedication(),
+          '/medication-list': (BuildContext context) => MedicationList(),
         });
   }
 }

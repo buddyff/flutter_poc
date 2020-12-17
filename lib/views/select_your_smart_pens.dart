@@ -26,16 +26,22 @@ class SelectYourSmartPensState extends State<SelectYourSmartPens> {
         flexibleSpace: FlexibleSpaceBar(
           titlePadding: EdgeInsets.only(left: 8, right: 8, bottom: 16),
           title: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[Text('Select your smart pens')]),
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Text('Select your smart pens'),
+            ],
+          ),
         ),
       ),
       SliverList(
-          delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-        return _bottomView();
-      }, childCount: 1)),
+        delegate: SliverChildBuilderDelegate(
+          (BuildContext context, int index) {
+            return _bottomView();
+          },
+          childCount: 1,
+        ),
+      ),
       new SliverFillRemaining(
         hasScrollBody: false,
         child: new Container(
