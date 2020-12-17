@@ -10,6 +10,11 @@ class CountryScreen extends StatefulWidget {
 }
 
 class _CountryScreenState extends State<CountryScreen> {
+  static const countries = {
+    "Argentina": "icons/flags/png/ar.png",
+    "Germany": 'icons/flags/png/de.png',
+    "United States": 'icons/flags/png/us.png',
+  };
   String countryValue = 'United States';
 
   Widget build(BuildContext context) {
@@ -100,22 +105,26 @@ class _CountryScreenState extends State<CountryScreen> {
   }
 
   _getCountries() {
-    return <String>['United States', 'Argentina', 'Brazil', 'Chile']
-        .map<DropdownMenuItem<String>>((String value) {
-      return DropdownMenuItem<String>(
-        value: value,
+    List<DropdownMenuItem<String>> countryItems = [];
+
+    countries.forEach((key, value) {
+      countryItems.add(DropdownMenuItem<String>(
+        value: key,
         child: Row(
           children: [
             IconButton(
-              icon: Image.asset('icons/flags/png/us.png',
-                  package: 'country_icons'),
+              icon: Image.asset(
+                value,
+                package: 'country_icons',
+              ),
               onPressed: () {},
             ),
             SizedBox(width: 10),
-            Text(value)
+            Text(key),
           ],
         ),
-      );
-    }).toList();
+      ));
+    });
+    return countryItems;
   }
 }
