@@ -96,7 +96,7 @@ class PrivacyPolicyState extends State<PrivacyPolicy> {
                   color: Color.fromRGBO(91, 95, 180, 1),
                   textColor: Colors.white,
                   onPressed: () {
-                    Navigator.of(context).pushNamed("");
+                    Navigator.of(context).pushNamed("/consent");
                   },
                   shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(30.0),
