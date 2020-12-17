@@ -158,7 +158,7 @@ class YourMedicationState extends State<YourMedication> {
             },
             child: Container(
               padding:
-                  EdgeInsets.only(left: 30, top: 10, bottom: 10, right: 20),
+                  EdgeInsets.only(left: 20, top: 10, bottom: 10, right: 20),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black, width: 1),
                 borderRadius: BorderRadius.circular(10.0),
@@ -178,7 +178,14 @@ class YourMedicationState extends State<YourMedication> {
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
-                  )
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  Image(
+                    image: AssetImage('lib/assets/badge.png'),
+                    height: 20,
+                  ),
                 ],
               ),
             ),
