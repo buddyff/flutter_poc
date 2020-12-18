@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_poc/presenters/medication_list_presenter.dart';
+
+class MedicationListInterface {
+  void loadMedications(List<String> medications) {}
+}
 
 class MedicationList extends StatefulWidget {
+  final MedicationListPresenter presenter = MedicationListPresenter();
+
   @override
   createState() => MedicationListState();
 }
 
-class MedicationListState extends State<MedicationList> {
-  final List<String> medications = [
-    'Admelog (U100/ml)',
-    'Apidra (U100/ml)',
-    'Basaglar (U100/ml)',
-    'FIAsp (U100/ml)',
-    'Humalog (U100/ml)',
-    'Humalog (U200/ml)',
-    'Lantus (U100/ml)',
-    'Levemir (U100/ml)',
-    'NovoLog (U100/ml)',
-    'Soliqua 100/33 (100/33)',
-    'Toujeo (U300/ml)',
-    'Tresiba (U100/ml)',
-    'Tresiba (U200/ml)',
-    'Xultophy (U100/ml)',
-  ];
+class MedicationListState extends State<MedicationList>
+    implements MedicationListInterface {
+  List<String> medications = [];
+
+  @override
+  void initState() {
+    super.initState();
+    this.widget.presenter.view = this;
+    this.widget.presenter.getMedications();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,16 +51,30 @@ class MedicationListState extends State<MedicationList> {
             )
           ],
         ),
-        Expanded(
+        Visibility(
+          visible: (medications.length == 0),
+          child: Expanded(
             child: Container(
-          color: Colors.white,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Table(
-              children: _getTableRows(context),
+              color: Colors.white,
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(),
             ),
           ),
-        ))
+        ),
+        Visibility(
+          visible: (medications.length > 0),
+          child: Expanded(
+            child: Container(
+              color: Colors.white,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Table(
+                  children: _getTableRows(context),
+                ),
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
@@ -73,7 +88,6 @@ class MedicationListState extends State<MedicationList> {
           children: [
             GestureDetector(
               onTap: () {
-                print(med);
                 Navigator.pop(context, med);
               },
               child: Container(
@@ -99,5 +113,12 @@ class MedicationListState extends State<MedicationList> {
       );
     });
     return rows;
+  }
+
+  @override
+  void loadMedications(List<String> medications) {
+    setState(() {
+      this.medications = medications;
+    });
   }
 }
