@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 class CountryScreen extends StatefulWidget {
@@ -16,6 +17,11 @@ class _CountryScreenState extends State<CountryScreen> {
     "United States": 'icons/flags/png/us.png',
   };
   String countryValue = 'United States';
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,6 +93,7 @@ class _CountryScreenState extends State<CountryScreen> {
               Expanded(
                 child: FlatButton(
                   onPressed: () {
+                    _saveCountry(countryValue);
                     Navigator.of(context).pushNamed('/what-is-my-dose-coach');
                   },
                   child: Text("Next"),
@@ -126,5 +133,10 @@ class _CountryScreenState extends State<CountryScreen> {
       ));
     });
     return countryItems;
+  }
+
+  void _saveCountry(String country) async {
+    SharedPreferences userDefaults = await SharedPreferences.getInstance();
+    userDefaults.setString('country', country);
   }
 }

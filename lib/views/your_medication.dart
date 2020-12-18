@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_poc/presenters/your_medication_presenter.dart';
 import 'package:flutter_poc/views/medication_list.dart';
 
+class YourMedicationInterface {
+  onboardingOK() {}
+}
+
 class YourMedication extends StatefulWidget {
+  final YourMedicationPresenter presenter = YourMedicationPresenter();
+
   @override
   createState() => YourMedicationState();
 }
 
-class YourMedicationState extends State<YourMedication> {
+class YourMedicationState extends State<YourMedication>
+    implements YourMedicationInterface {
   String med1 = "";
   String med2 = "";
   bool showingAnotherInsulin = false;
+
+  @override
+  void initState() {
+    super.initState();
+    this.widget.presenter.view = this;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,13 +124,7 @@ class YourMedicationState extends State<YourMedication> {
                         child: FlatButton(
                       onPressed: med1 != ""
                           ? () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                        title: Text(":)"),
-                                        content: Text(
-                                            "You finished the onboarding flow successfully"),
-                                      ));
+                              this.widget.presenter.sendOnboarding();
                             }
                           : null,
                       child: Text("Next"),
@@ -192,6 +200,17 @@ class YourMedicationState extends State<YourMedication> {
           ),
         )
       ],
+    );
+  }
+
+  @override
+  onboardingOK() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(":)"),
+        content: Text("You finished the onboarding flow successfully"),
+      ),
     );
   }
 }

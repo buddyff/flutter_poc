@@ -6,13 +6,7 @@ import 'package:http/http.dart' as http;
 class MedicationListPresenter {
   MedicationListInterface view;
 
-  /*void viewLoaded() {
-    List<String> medications = getMedications();
-    view.loadMedications(medications);
-  }*/
-
   Future<List<String>> getMedications() async {
-    print('invocada');
     List<String> medications = [];
     final response = await http.get(
         'https://350cc076-df72-4fe5-bbf4-00a4f362f677.mock.pstmn.io/api/2.0/medications');

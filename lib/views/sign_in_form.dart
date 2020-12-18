@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInForm extends StatefulWidget {
   @override
@@ -254,6 +255,7 @@ class SignInFormState extends State<SignInForm> {
                   child: FlatButton(
                     onPressed: _isValidForm()
                         ? () {
+                            _saveForm();
                             Navigator.of(context)
                                 .pushNamed('/license-agreement');
                           }
@@ -285,5 +287,14 @@ class SignInFormState extends State<SignInForm> {
         _phoneController.text != null &&
         _emailController.text != "" &&
         _emailController.text != null;
+  }
+
+  void _saveForm() async {
+    SharedPreferences userDefaults = await SharedPreferences.getInstance();
+    userDefaults.setString('firstName', _nameController.text);
+    userDefaults.setString('lastName', _lastNameController.text);
+    userDefaults.setString('birthdate', _dateController.text);
+    userDefaults.setString('phone', _phoneController.text);
+    userDefaults.setString('email', _emailController.text);
   }
 }
