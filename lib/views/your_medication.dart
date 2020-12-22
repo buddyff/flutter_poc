@@ -180,16 +180,20 @@ class YourMedicationState extends State<YourMedication>
                     fit: BoxFit.fitWidth,
                   ),
                   SizedBox(width: 20),
-                  Text(
-                    (medication == "") ? "None" : medication,
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    flex: 6,
+                    child: Text(
+                      (medication == "") ? "None" : medication,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      softWrap: false,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  Expanded(
-                    child: Container(),
-                  ),
+                  SizedBox(width: 20),
                   Image(
                     image: AssetImage('lib/assets/badge.png'),
                     height: 20,
