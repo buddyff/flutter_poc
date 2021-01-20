@@ -18,7 +18,7 @@ class YourMedicationPresenter {
 
     List<String> medications = [];
     final response = await http.post(
-      "https://run.mocky.io/v3/5bf3daa4-74c7-420f-ba79-bfa593b74bca",
+      "https://run.mocky.io/v3/ea1d89e0-1e80-43c0-ab47-a5b4d912b332",
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -35,7 +35,6 @@ class YourMedicationPresenter {
     );
 
     if (response.statusCode == 200) {
-      print('uepa');
       view.onboardingOK();
     }
   }

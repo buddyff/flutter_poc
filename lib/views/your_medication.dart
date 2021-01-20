@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_poc/presenters/your_medication_presenter.dart';
 import 'package:flutter_poc/views/medication_list.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class YourMedicationInterface {
   onboardingOK() {}
@@ -47,7 +49,7 @@ class YourMedicationState extends State<YourMedication>
               Row(
                 children: [
                   Text(
-                    'Your medication',
+                    AppLocalizations.of(context).yourMedication,
                     style: TextStyle(
                       fontSize: 26,
                       color: Colors.white,

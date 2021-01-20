@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_poc/views/consent.dart';
 import 'package:flutter_poc/views/license_agreement.dart';
 import 'package:flutter_poc/views/medication_list.dart';
@@ -52,7 +53,17 @@ class MyApp extends StatelessWidget {
           '/consent': (BuildContext context) => Consent(),
           '/your-medication': (BuildContext context) => YourMedication(),
           '/medication-list': (BuildContext context) => MedicationList(),
-        });
+        },
+        localizationsDelegates: [
+          // ... app-specific localization delegate[s] here
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en', ''), // English
+          // ... other locales the app supports
+        ]);
   }
 }
 
