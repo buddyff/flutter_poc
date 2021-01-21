@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io' show Platform;
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
   scopes: <String>['email'],
@@ -61,7 +64,12 @@ class _LoginPageState extends State<LoginPage> {
             title: Text(_currentUser.displayName ?? ''),
             subtitle: Text(_currentUser.email ?? ''),
           ),
-          const Text("Signed in successfully."),
+          const Text(
+            "Signed in successfully.",
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
           ElevatedButton(
             child: const Text('SIGN OUT'),
             style: ElevatedButton.styleFrom(
@@ -82,23 +90,48 @@ class _LoginPageState extends State<LoginPage> {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
+          _buildPlatformLogo(),
           const Text(
             "You are not currently signed in.",
             style: TextStyle(
               fontSize: 18,
             ),
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Color.fromRGBO(91, 95, 180, 1),
-            ),
-            child: const Text('SIGN IN'),
-            onPressed: _handleSignIn,
-          ),
+          _buildSignInWidget(),
         ],
       );
     }
   }
+
+  Widget _buildSignInWidget() {
+        // return ElevatedButton(
+        //   style: ElevatedButton.styleFrom(
+        //     primary: Color.fromRGBO(91, 95, 180, 1),
+        //   ),
+        //   child: Text('SIGN IN'),
+        //   onPressed: _handleSignIn,
+        // );
+    
+        return SignInButton(
+          Buttons.GoogleDark,
+          onPressed: _handleSignIn,
+        );
+      }
+  
+    Widget _buildPlatformLogo() {
+        String basePath = "lib/assets/";
+        String imageName = "";
+        if (Platform.isAndroid) {
+          imageName = "android.png";
+        } else if (Platform.isIOS) {
+          imageName = "apple.png";
+        }
+        return Image(
+          image: AssetImage("$basePath$imageName"),
+          height: 100,
+          fit: BoxFit.fitWidth,
+        );
+      }
 
   _navigateToStartOnBoarding() {
     Navigator.pushNamed(context, '/start-onboarding');
