@@ -28,7 +28,7 @@ class DBManager {
         onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE Medication ("
           "id TEXT PRIMARY KEY,"
-          "full_name TEXT"
+          "fullName TEXT"
           ")");
     });
   }

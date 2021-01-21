@@ -9,8 +9,8 @@ class Medication {
   }
 
   factory Medication.fromMap(Map<String, dynamic> json) {
-    return Medication(id: json["id"], fullName: json["full_name"]);
+    return Medication(id: json["id"], fullName: json["fullName"]);
   }
 
-  Map<String, dynamic> toMap() => {"id": id, "full_name": fullName};
+  Map<String, dynamic> toMap() => {"id": id, "fullName": fullName};
 }
