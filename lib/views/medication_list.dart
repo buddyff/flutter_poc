@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_poc/models/medication_list_model.dart';
 import 'package:flutter_poc/presenters/medication_list_presenter.dart';
 
 class MedicationListInterface {
-  void loadMedications(List<String> medications) {}
+  void loadMedications(List<Medication> medications) {}
 }
 
 class MedicationList extends StatefulWidget {
@@ -14,7 +15,7 @@ class MedicationList extends StatefulWidget {
 
 class MedicationListState extends State<MedicationList>
     implements MedicationListInterface {
-  List<String> medications = [];
+  List<Medication> medications = [];
 
   @override
   void initState() {
@@ -88,7 +89,7 @@ class MedicationListState extends State<MedicationList>
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.pop(context, med);
+                Navigator.pop(context, med.fullName);
               },
               child: Container(
                 padding: EdgeInsets.all(8),
@@ -101,7 +102,7 @@ class MedicationListState extends State<MedicationList>
                   ),
                 ),
                 child: Text(
-                  med,
+                  med.fullName,
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -116,7 +117,7 @@ class MedicationListState extends State<MedicationList>
   }
 
   @override
-  void loadMedications(List<String> medications) {
+  void loadMedications(List<Medication> medications) {
     setState(() {
       this.medications = medications;
     });
