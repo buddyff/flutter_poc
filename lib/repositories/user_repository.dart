@@ -1,30 +1,33 @@
 import 'package:flutter_poc/models/user.dart';
+import 'package:flutter_poc/repositories/data_encrypter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepository {
+  final encrypter = DataEncrypter();
+
   void saveCountry(String country) async {
     SharedPreferences userDefaults = await SharedPreferences.getInstance();
     userDefaults.setString('country', country);
   }
 
-  void saveUser(User user) async {
+  void saveData(String firstName, String lastName, String birthDate,
+      String phone, String email) async {
     SharedPreferences userDefaults = await SharedPreferences.getInstance();
-    userDefaults.setString('firstName', user.name);
-    userDefaults.setString('lastName', user.lastName);
-    userDefaults.setString('birthdate', user.birthDate);
-    userDefaults.setString('phone', user.phone);
-    userDefaults.setString('email', user.email);
-    userDefaults.setString('country', user.country);
+    userDefaults.setString('firstName', encrypter.encrypt(firstName));
+    userDefaults.setString('lastName', encrypter.encrypt(lastName));
+    userDefaults.setString('birthdate', birthDate);
+    userDefaults.setString('phone', encrypter.encrypt(phone));
+    userDefaults.setString('email', encrypter.encrypt(email));
   }
 
   Future<User> getUser() async {
     SharedPreferences userDefaults = await SharedPreferences.getInstance();
     return User(
-      name: userDefaults.getString('name'),
-      lastName: userDefaults.getString('lastName'),
+      name: encrypter.decrypt(userDefaults.getString('firstName')),
+      lastName: encrypter.decrypt(userDefaults.getString('lastName')),
       birthDate: userDefaults.getString('birthdate'),
-      phone: userDefaults.getString('phone'),
-      email: userDefaults.getString('email'),
+      phone: encrypter.decrypt(userDefaults.getString('phone')),
+      email: encrypter.decrypt(userDefaults.getString('email')),
       country: userDefaults.getString('country'),
     );
   }

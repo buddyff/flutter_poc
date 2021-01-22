@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_poc/models/user.dart';
 import 'package:flutter_poc/repositories/user_repository.dart';
 
 class SignInForm extends StatefulWidget {
@@ -291,14 +290,12 @@ class SignInFormState extends State<SignInForm> {
   }
 
   void _saveForm() async {
-    UserRepository().saveUser(
-      User(
-        name: _nameController.text,
-        lastName: _lastNameController.text,
-        birthDate: _dateController.text,
-        phone: _phoneController.text,
-        email: _emailController.text,
-      ),
+    UserRepository().saveData(
+      _nameController.text,
+      _lastNameController.text,
+      _dateController.text,
+      _phoneController.text,
+      _emailController.text,
     );
   }
 }
