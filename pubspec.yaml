@@ -28,11 +28,12 @@ dependencies:
   shared_preferences: ^0.5.12+4 
   sqflite:
   path_provider:
-  flutter_localizations:    
+  flutter_localizations:
     sdk: flutter
   intl: ^0.16.1
   google_sign_in: ^4.5.9
   flutter_signin_button: ^1.1.0
+  encrypt: ^4.1.0
 
 
 

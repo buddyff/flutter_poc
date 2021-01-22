@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_poc/models/user.dart';
+import 'package:flutter_poc/repositories/user_repository.dart';
 
 class SignInForm extends StatefulWidget {
   @override
@@ -26,11 +27,10 @@ class SignInFormState extends State<SignInForm> {
   }
 
   void getUserData() async {
-    SharedPreferences userDefaults = await SharedPreferences.getInstance();
-
-    _nameController.text = userDefaults.getString('firstName');
-    _lastNameController.text = userDefaults.getString('lastName');
-    _emailController.text = userDefaults.getString('email');
+    User user = await UserRepository().getUser();
+    _nameController.text = user.name;
+    _lastNameController.text = user.lastName;
+    _emailController.text = user.email;
   }
 
   _scrollListener() {
@@ -300,11 +300,12 @@ class SignInFormState extends State<SignInForm> {
   }
 
   void _saveForm() async {
-    SharedPreferences userDefaults = await SharedPreferences.getInstance();
-    userDefaults.setString('firstName', _nameController.text);
-    userDefaults.setString('lastName', _lastNameController.text);
-    userDefaults.setString('birthdate', _dateController.text);
-    userDefaults.setString('phone', _phoneController.text);
-    userDefaults.setString('email', _emailController.text);
+    UserRepository().saveData(
+      _nameController.text,
+      _lastNameController.text,
+      _dateController.text,
+      _phoneController.text,
+      _emailController.text,
+    );
   }
 }

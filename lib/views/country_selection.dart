@@ -1,6 +1,7 @@
 import 'package:flutter_poc/database/db_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_poc/repositories/user_repository.dart';
 
 class CountryScreen extends StatefulWidget {
   CountryScreen({Key key, this.title}) : super(key: key);
@@ -137,7 +138,6 @@ class _CountryScreenState extends State<CountryScreen> {
   }
 
   void _saveCountry(String country) async {
-    SharedPreferences userDefaults = await SharedPreferences.getInstance();
-    userDefaults.setString('country', country);
+    UserRepository().saveCountry(country);
   }
 }

@@ -1,9 +1,10 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_poc/repositories/user_repository.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io' show Platform;
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
   scopes: <String>['email'],
@@ -32,13 +33,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _saveUserData() async {
-    SharedPreferences userDefaults = await SharedPreferences.getInstance();
-
     var names = _currentUser.displayName.split(" ");
-
-    userDefaults.setString('firstName', names.first);
-    userDefaults.setString('lastName', names.last);
-    userDefaults.setString('email', _currentUser.email);
+    UserRepository().saveLoginData(
+      names.first,
+      names.last,
+      _currentUser.email,
+    );
   }
 
   @override
@@ -104,34 +104,34 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildSignInWidget() {
-        // return ElevatedButton(
-        //   style: ElevatedButton.styleFrom(
-        //     primary: Color.fromRGBO(91, 95, 180, 1),
-        //   ),
-        //   child: Text('SIGN IN'),
-        //   onPressed: _handleSignIn,
-        // );
-    
-        return SignInButton(
-          Buttons.GoogleDark,
-          onPressed: _handleSignIn,
-        );
-      }
-  
-    Widget _buildPlatformLogo() {
-        String basePath = "lib/assets/";
-        String imageName = "";
-        if (Platform.isAndroid) {
-          imageName = "android.png";
-        } else if (Platform.isIOS) {
-          imageName = "apple.png";
-        }
-        return Image(
-          image: AssetImage("$basePath$imageName"),
-          height: 100,
-          fit: BoxFit.fitWidth,
-        );
-      }
+    // return ElevatedButton(
+    //   style: ElevatedButton.styleFrom(
+    //     primary: Color.fromRGBO(91, 95, 180, 1),
+    //   ),
+    //   child: Text('SIGN IN'),
+    //   onPressed: _handleSignIn,
+    // );
+
+    return SignInButton(
+      Buttons.GoogleDark,
+      onPressed: _handleSignIn,
+    );
+  }
+
+  Widget _buildPlatformLogo() {
+    String basePath = "lib/assets/";
+    String imageName = "";
+    if (Platform.isAndroid) {
+      imageName = "android.png";
+    } else if (Platform.isIOS) {
+      imageName = "apple.png";
+    }
+    return Image(
+      image: AssetImage("$basePath$imageName"),
+      height: 100,
+      fit: BoxFit.fitWidth,
+    );
+  }
 
   _navigateToStartOnBoarding() {
     Navigator.pushNamed(context, '/start-onboarding');
