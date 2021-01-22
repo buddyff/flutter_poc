@@ -21,6 +21,16 @@ class SignInFormState extends State<SignInForm> {
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
     super.initState();
+
+    getUserData();
+  }
+
+  void getUserData() async {
+    SharedPreferences userDefaults = await SharedPreferences.getInstance();
+
+    _nameController.text = userDefaults.getString('firstName');
+    _lastNameController.text = userDefaults.getString('lastName');
+    _emailController.text = userDefaults.getString('email');
   }
 
   _scrollListener() {
