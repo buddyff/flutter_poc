@@ -20,6 +20,10 @@ class UserRepository {
     userDefaults.setString('email', encrypter.encrypt(email));
   }
 
+  void saveLoginData(String firstName, String lastName, String email) async {
+    saveData(firstName, lastName, "", "", email);
+  }
+
   Future<User> getUser() async {
     SharedPreferences userDefaults = await SharedPreferences.getInstance();
     return User(
