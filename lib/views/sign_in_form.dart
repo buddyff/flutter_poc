@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_poc/models/user.dart';
+import 'package:flutter_poc/repositories/user_repository.dart';
 
 class SignInForm extends StatefulWidget {
   @override
@@ -290,11 +291,14 @@ class SignInFormState extends State<SignInForm> {
   }
 
   void _saveForm() async {
-    SharedPreferences userDefaults = await SharedPreferences.getInstance();
-    userDefaults.setString('firstName', _nameController.text);
-    userDefaults.setString('lastName', _lastNameController.text);
-    userDefaults.setString('birthdate', _dateController.text);
-    userDefaults.setString('phone', _phoneController.text);
-    userDefaults.setString('email', _emailController.text);
+    UserRepository().saveUser(
+      User(
+        name: _nameController.text,
+        lastName: _lastNameController.text,
+        birthDate: _dateController.text,
+        phone: _phoneController.text,
+        email: _emailController.text,
+      ),
+    );
   }
 }
