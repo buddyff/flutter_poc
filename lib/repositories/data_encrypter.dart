@@ -10,12 +10,18 @@ class DataEncrypter {
   }
 
   String encrypt(String plainText) {
-    return _encrypter.encrypt(plainText, iv: iv).base64;
+    if (plainText.isEmpty)
+      return "";
+    else
+      return _encrypter.encrypt(plainText, iv: iv).base64;
   }
 
   String decrypt(String encryptedText) {
-    return _encrypter
-        .decrypt(Encrypted.fromBase64(encryptedText), iv: iv)
-        .toString();
+    if (encryptedText.isEmpty)
+      return "";
+    else
+      return _encrypter
+          .decrypt(Encrypted.fromBase64(encryptedText), iv: iv)
+          .toString();
   }
 }
