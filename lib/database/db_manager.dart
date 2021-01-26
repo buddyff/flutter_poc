@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_poc/models/medication_list_model.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+
+//import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_sqlcipher/sqflite.dart';
 
 class DBManager {
   DBManager._();
@@ -24,8 +26,10 @@ class DBManager {
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "TestDB.db");
-    return await openDatabase(path, version: 1, onOpen: (db) {},
-        onCreate: (Database db, int version) async {
+    return await openDatabase(path,
+        version: 2,
+        onOpen: (db) {},
+        password: 'hello world', onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE Medication ("
           "id TEXT PRIMARY KEY,"
           "fullName TEXT"
